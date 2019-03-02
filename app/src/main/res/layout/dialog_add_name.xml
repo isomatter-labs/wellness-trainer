@@ -8,13 +8,13 @@
 
     <EditText
             android:id="@+id/dialogNameEt"
-            android:hint="Enter Name"
+            android:hint="My Workout"
             android:inputType="text|textAutoComplete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     <EditText
             android:id="@+id/dialogDescEt"
-            android:hint="Enter Description"
+            android:hint="Jumping jacks for days!"
             android:inputType="textShortMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
