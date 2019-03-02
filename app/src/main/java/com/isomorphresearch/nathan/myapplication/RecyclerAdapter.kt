@@ -19,7 +19,9 @@ class RecyclerAdapter(private var workouts: ArrayList<Workout>) : RecyclerView.A
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkoutHolder {
         val inflatedView = parent.inflate(R.layout.recyclerview_item_row, false)
-        return WorkoutHolder(inflatedView)    }
+        return WorkoutHolder(inflatedView)
+    }
+
 
     //1
     class WorkoutHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {

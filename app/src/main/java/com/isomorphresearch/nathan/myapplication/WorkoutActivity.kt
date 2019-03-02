@@ -14,6 +14,7 @@ class WorkoutActivity : AppCompatActivity() {
 
         selectedWorkout = intent.getSerializableExtra(WORKOUT_KEY) as Workout
         workoutName?.text = selectedWorkout?.name
+
     }
 
     companion object {
