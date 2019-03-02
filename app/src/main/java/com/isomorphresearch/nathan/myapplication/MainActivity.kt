@@ -1,5 +1,6 @@
 package com.isomorphresearch.nathan.myapplication
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
@@ -8,11 +9,13 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.dialog_add_name.view.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -35,9 +38,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         recyclerView.adapter = adapter
 
         fab.setOnClickListener { view ->
+            val mDialogView = LayoutInflater.from(this).inflate(R.layout.dialog_add_name, null)
+            val mBuilder = AlertDialog.Builder(this)
+                .setView(mDialogView)
+                .setTitle("New Workout")
+            val mAlertDialog = mBuilder.show()
 
-            workoutList.add(Workout(name="test", img="", exercises = listOf()))
-            adapter!!.notifyDataSetChanged()
+            mDialogView.dialogAddBtn.setOnClickListener {
+                mAlertDialog.dismiss()
+                val newName = mDialogView.dialogNameEt.text.toString()
+                val newDescription = mDialogView.dialogDescEt.text.toString()
+                workoutList.add(Workout(name=newName, desc = newDescription, img="", exercises = listOf()))
+                adapter!!.notifyDataSetChanged()
+            }
+
+            mDialogView.dialogCancelBtn.setOnClickListener {
+                mAlertDialog.dismiss()
+            }
 
             Snackbar.make(view, "Workthing Added", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
