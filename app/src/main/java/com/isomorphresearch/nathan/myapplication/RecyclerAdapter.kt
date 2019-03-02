@@ -1,14 +1,19 @@
 package com.isomorphresearch.nathan.myapplication
 
+import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.provider.ContactsContract
 import android.support.v7.widget.RecyclerView
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import kotlinx.android.synthetic.main.dialog_del_workout.view.*
 import kotlinx.android.synthetic.main.recyclerview_item_row.view.*
 
-class RecyclerAdapter(private var workouts: ArrayList<Workout>) : RecyclerView.Adapter<RecyclerAdapter.WorkoutHolder>() {
+class RecyclerAdapter(private var workouts: ArrayList<Workout>, var context: Context) : RecyclerView.Adapter<RecyclerAdapter.WorkoutHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerAdapter.WorkoutHolder, position: Int) {
         val itemIndex = workouts[position]
@@ -24,7 +29,7 @@ class RecyclerAdapter(private var workouts: ArrayList<Workout>) : RecyclerView.A
 
 
     //1
-    class WorkoutHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
+    inner class WorkoutHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
         //2
         private var view: View = v
         private var workout: Workout? = null
@@ -32,6 +37,25 @@ class RecyclerAdapter(private var workouts: ArrayList<Workout>) : RecyclerView.A
         //3
         init {
             v.setOnClickListener(this)
+            v.findViewById<ImageView>(R.id.del_btn).setOnClickListener() {
+//                val mDialogView = LayoutInflater.from(context).inflate(R.layout.dialog_del_workout, null)
+//                val mBuilder = AlertDialog.Builder(context)
+//                    .setView(mDialogView)
+//                    .setTitle("Delete Workout?")
+//                val mAlertDialog = mBuilder.show()
+//
+//                mDialogView.dialogDelBtn.setOnClickListener {
+//                    mAlertDialog.dismiss()
+//                    workouts.remove(workout)
+//                    notifyDataSetChanged()
+//                }
+//
+//                mDialogView.dialogCancelBtn.setOnClickListener {
+//                    mAlertDialog.dismiss()
+//                }
+                workouts.remove(workout)
+                notifyDataSetChanged()
+            }
         }
 
         //4
@@ -39,7 +63,7 @@ class RecyclerAdapter(private var workouts: ArrayList<Workout>) : RecyclerView.A
             Log.d("RecyclerView", "CLICK!")
             val context = itemView.context
             val showWorkoutIntent = Intent(context, WorkoutActivity::class.java)
-            showWorkoutIntent.putExtra(WORKOUT_KEY, workout)
+            showWorkoutIntent.putExtra("WORKOUT", workout)
             context.startActivity(showWorkoutIntent)
         }
 
@@ -49,10 +73,10 @@ class RecyclerAdapter(private var workouts: ArrayList<Workout>) : RecyclerView.A
             view.itemDescription.text = workout.name;
         }
 
-        companion object {
-            //5`
-            private val WORKOUT_KEY = "WORKOUT"
-        }
+//        companion object {
+//            //5`
+//            private val WORKOUT_KEY = "WORKOUT"
+//        }
     }
 }
 

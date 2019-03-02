@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         linearLayoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = linearLayoutManager
-        adapter = RecyclerAdapter(workoutList)
+        adapter = RecyclerAdapter(workoutList, applicationContext)
         recyclerView.adapter = adapter
 
         fab.setOnClickListener { view ->
