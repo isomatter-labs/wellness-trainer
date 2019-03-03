@@ -79,15 +79,17 @@ class RecyclerAdapter(var context: Context) : RecyclerView.Adapter<RecyclerAdapt
             view.imageView4.setImageResource(R.drawable.ic_logo)
             var totalSecs = 0
             if (workout.exercises.size > 0) {
-                workout.cooldown * (workout.exercises.size - 1)
+                totalSecs += workout.cooldown * (workout.exercises.size - 1)
             }
             for (exercise in workout.exercises) {
                 totalSecs += exercise.time * 60 // in seconds
             }
-            var minutes = totalSecs.div(60)
+            var minutes = totalSecs / 60
             var seconds = totalSecs % 60
 
-                view.time.text = "$minutes:$seconds"
+                view.time.text = ("$minutes:" + "%02d".format(seconds))
+//            view.time.text = ("$totalSecs")
+
         }
     }
 }

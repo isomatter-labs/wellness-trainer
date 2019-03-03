@@ -51,11 +51,11 @@ class ExRecyclerAdapter(private var exercises: ArrayList<Exercise>, var context:
 
         fun bindWorkout(exercise: Exercise) {
             this.exercise = exercise
-//            Picasso.with(view.context).load(workout.img).into(view.itemImage)
             view.itemName.text = exercise.name;
             view.itemDesc.text = exercise.Desc;
             view.imageView4.setImageResource(R.drawable.ic_logo)
-            view.time.text = exercise.time.toString()
+
+            view.time.text = ("%02d".format(exercise.time) + ":00")
         }
 
 //        companion object {
