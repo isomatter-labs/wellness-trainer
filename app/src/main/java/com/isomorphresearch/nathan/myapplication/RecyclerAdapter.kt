@@ -70,7 +70,9 @@ class RecyclerAdapter(private var workouts: ArrayList<Workout>, var context: Con
         fun bindWorkout(workout: Workout) {
             this.workout = workout
 //            Picasso.with(view.context).load(workout.img).into(view.itemImage)
-            view.itemDescription.text = workout.name;
+            view.itemName.text = workout.name;
+            view.itemDesc.text = workout.desc;
+            view.imageView4.setImageResource(R.drawable.ic_logo)
         }
 
 //        companion object {
