@@ -1,14 +1,16 @@
-package com.isomorphresearch.nathan.myapplication
+package com.isomorphresearch.nathan.myapplication.Activities
 
-import android.app.Activity
 import android.app.AlertDialog
-import android.content.Intent
-import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
+import com.isomorphresearch.nathan.myapplication.Adapters.ExRecyclerAdapter
+import com.isomorphresearch.nathan.myapplication.Classes.Exercise
+import com.isomorphresearch.nathan.myapplication.Classes.Workout
+import com.isomorphresearch.nathan.myapplication.IsoApp
+import com.isomorphresearch.nathan.myapplication.R
 import kotlinx.android.synthetic.main.app_bar_workout.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.dialog_add_exer.view.*
@@ -29,7 +31,10 @@ class WorkoutActivity : AppCompatActivity() {
 
         linearLayoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = linearLayoutManager
-        adapter = ExRecyclerAdapter(selectedWorkout!!.exercises, applicationContext)
+        adapter = ExRecyclerAdapter(
+            selectedWorkout!!.exercises,
+            applicationContext
+        )
         recyclerView.adapter = adapter
 
         fab1.setOnClickListener { view ->
@@ -54,7 +59,13 @@ class WorkoutActivity : AppCompatActivity() {
                 if (newTimeStr != "") {
                     newTime = newTimeStr.toInt()
                 }
-                workout?.exercises?.add(Exercise(name = newName, Desc = newDescription, time = newTime))
+                workout?.exercises?.add(
+                    Exercise(
+                        name = newName,
+                        Desc = newDescription,
+                        time = newTime
+                    )
+                )
                 adapter!!.notifyDataSetChanged()
             }
 

@@ -1,8 +1,6 @@
-package com.isomorphresearch.nathan.myapplication
+package com.isomorphresearch.nathan.myapplication.Activities
 
-import android.app.Activity
 import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
@@ -10,11 +8,12 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.MenuItem
+import com.isomorphresearch.nathan.myapplication.Adapters.RecyclerAdapter
+import com.isomorphresearch.nathan.myapplication.Classes.Workout
+import com.isomorphresearch.nathan.myapplication.IsoApp
+import com.isomorphresearch.nathan.myapplication.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -55,7 +54,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 if (newCooldownStr != "") {
                     newCooldown = newCooldownStr.toInt()
                 }
-                workoutList.add(Workout(name=newName, cooldown = newCooldown, desc = newDescription, img="", exercises = arrayListOf()))
+                workoutList.add(
+                    Workout(
+                        name = newName,
+                        cooldown = newCooldown,
+                        desc = newDescription,
+                        img = "",
+                        exercises = arrayListOf()
+                    )
+                )
                 adapter!!.notifyDataSetChanged()
             }
 
@@ -68,7 +75,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         val toggle = ActionBarDrawerToggle(
-            this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+            this, drawer_layout, toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
         )
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()

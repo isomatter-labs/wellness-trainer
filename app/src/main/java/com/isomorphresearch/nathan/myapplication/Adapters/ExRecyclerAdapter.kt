@@ -1,21 +1,18 @@
-package com.isomorphresearch.nathan.myapplication
+package com.isomorphresearch.nathan.myapplication.Adapters
 
-import android.app.AlertDialog
 import android.content.Context
-import android.content.Intent
-import android.provider.ContactsContract
 import android.support.v7.widget.RecyclerView
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import kotlinx.android.synthetic.main.dialog_del_workout.view.*
+import com.isomorphresearch.nathan.myapplication.Classes.Exercise
+import com.isomorphresearch.nathan.myapplication.R
+import com.isomorphresearch.nathan.myapplication.inflate
 import kotlinx.android.synthetic.main.recyclerview_item_row.view.*
 
 class ExRecyclerAdapter(private var exercises: ArrayList<Exercise>, var context: Context) : RecyclerView.Adapter<ExRecyclerAdapter.ExerciseHolder>() {
 
-    override fun onBindViewHolder(holder: ExRecyclerAdapter.ExerciseHolder, position: Int) {
+    override fun onBindViewHolder(holder: ExerciseHolder, position: Int) {
         val itemIndex = exercises[position]
         holder.bindWorkout(itemIndex)
     }

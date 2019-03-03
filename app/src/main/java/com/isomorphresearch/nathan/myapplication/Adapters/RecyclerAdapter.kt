@@ -1,24 +1,24 @@
-package com.isomorphresearch.nathan.myapplication
+package com.isomorphresearch.nathan.myapplication.Adapters
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
-import android.provider.ContactsContract
-import android.support.v4.app.ActivityCompat.startActivityForResult
 import android.support.v7.widget.RecyclerView
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import kotlinx.android.synthetic.main.dialog_del_workout.view.*
+import com.isomorphresearch.nathan.myapplication.Classes.Workout
+import com.isomorphresearch.nathan.myapplication.IsoApp
+import com.isomorphresearch.nathan.myapplication.R
+import com.isomorphresearch.nathan.myapplication.Activities.WorkoutActivity
+import com.isomorphresearch.nathan.myapplication.inflate
 import kotlinx.android.synthetic.main.recyclerview_item_row.view.*
 
 class RecyclerAdapter(var context: Context) : RecyclerView.Adapter<RecyclerAdapter.WorkoutHolder>() {
 
     var wPosition: Int? = null
-    override fun onBindViewHolder(holder: RecyclerAdapter.WorkoutHolder, position: Int) {
+    override fun onBindViewHolder(holder: WorkoutHolder, position: Int) {
         val itemIndex = IsoApp.workouts[position]
         wPosition = position
         holder.bindWorkout(itemIndex)
@@ -88,13 +88,8 @@ class RecyclerAdapter(var context: Context) : RecyclerView.Adapter<RecyclerAdapt
             var seconds = totalSecs % 60
 
                 view.time.text = "$minutes:$seconds"
-            }
         }
-
-//        companion object {
-//            //5`
-//            private val WORKOUT_KEY = "WORKOUT"
-//        }
     }
 }
+
 
