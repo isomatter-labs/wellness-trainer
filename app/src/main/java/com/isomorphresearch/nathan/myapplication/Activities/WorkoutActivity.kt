@@ -1,11 +1,15 @@
 package com.isomorphresearch.nathan.myapplication.Activities
 
+import android.app.Activity
 import android.app.AlertDialog
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import com.isomorphresearch.nathan.myapplication.Adapters.ExRecyclerAdapter
 import com.isomorphresearch.nathan.myapplication.Classes.Exercise
 import com.isomorphresearch.nathan.myapplication.Classes.Workout
@@ -38,16 +42,19 @@ class WorkoutActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
 
         fab1.setOnClickListener { view ->
-            Snackbar.make(view, "Do it yourself!", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+                Log.d("RecyclerView", "CLICK!")
+                val context = view.context
+                val intent = Intent(context, RunActivity::class.java)
+                intent.putExtra("RUN", selectedWorkout)
+            (context as Activity).startActivity(intent)
         }
 
-        fab2.setOnClickListener { _ ->
+        fab2.setOnClickListener { view ->
             val workout = selectedWorkout // to allow changing exercises
             val mDialogView = LayoutInflater.from(this).inflate(R.layout.dialog_add_exer, null)
             val mBuilder = AlertDialog.Builder(this)
                 .setView(mDialogView)
-                .setTitle("New Workout")
+                .setTitle("New Exercise")
             val mAlertDialog = mBuilder.show()
 
             mDialogView.dialogAddBtn.setOnClickListener {
