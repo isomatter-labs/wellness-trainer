@@ -1,8 +1,12 @@
 package com.isomorphresearch.nathan.myapplication
 
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_workout.*
+import android.support.design.widget.Snackbar
+import android.widget.TextView
+import android.widget.Toast
+import kotlinx.android.synthetic.main.app_bar_workout.*
 
 class WorkoutActivity : AppCompatActivity() {
 
@@ -10,12 +14,17 @@ class WorkoutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_workout)
+        setContentView(R.layout.app_bar_workout)
 
         selectedWorkout = intent.getSerializableExtra(WORKOUT_KEY) as Workout
-        workoutName?.text = selectedWorkout?.name
 
+        fab1.setOnClickListener { view ->
+            Snackbar.make(view, "Do it yourself!", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show()
+        }
     }
+
+
 
     companion object {
         //5`
