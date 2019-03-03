@@ -1,9 +1,11 @@
 package com.isomorphresearch.nathan.myapplication
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.provider.ContactsContract
+import android.support.v4.app.ActivityCompat.startActivityForResult
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -62,15 +64,16 @@ class RecyclerAdapter(private var workouts: ArrayList<Workout>, var context: Con
         override fun onClick(v: View) {
             Log.d("RecyclerView", "CLICK!")
             val context = itemView.context
-            val showWorkoutIntent = Intent(context, WorkoutActivity::class.java)
-            showWorkoutIntent.putExtra("WORKOUT", workout)
-            context.startActivity(showWorkoutIntent)
+            val intent = Intent(context, WorkoutActivity::class.java)
+            intent.putExtra("WORKOUT", workout)
+            (context as Activity).startActivityForResult(intent, 1)
         }
 
         fun bindWorkout(workout: Workout) {
             this.workout = workout
 //            Picasso.with(view.context).load(workout.img).into(view.itemImage)
             view.itemDescription.text = workout.name;
+            Log.e("fuck", "fuck")
         }
 
 //        companion object {

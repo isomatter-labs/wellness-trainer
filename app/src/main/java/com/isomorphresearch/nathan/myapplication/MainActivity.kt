@@ -1,6 +1,8 @@
 package com.isomorphresearch.nathan.myapplication
 
+import android.app.Activity
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
@@ -48,7 +50,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 mAlertDialog.dismiss()
                 val newName = mDialogView.dialogNameEt.text.toString()
                 val newDescription = mDialogView.dialogDescEt.text.toString()
-                workoutList.add(Workout(name=newName, desc = newDescription, img="", exercises = listOf()))
+                workoutList.add(Workout(name=newName, desc = newDescription, img="", exercises = arrayListOf()))
                 adapter!!.notifyDataSetChanged()
             }
 
@@ -67,6 +69,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+    }
+
+    override fun onActivityResult(req: Int, res: Int, intent: Intent?) {
+        if (req == 1) {
+            if (res == Activity.RESULT_OK) {
+                var workout = intent?.getSerializableExtra("WORKOUT")
+            }
+        }
     }
 
 

@@ -1,3 +1,3 @@
 package com.isomorphresearch.nathan.myapplication
 
-data class Exercise(var name: String, var time: Int)
+data class Exercise(var name: String, var Desc: String, var time: Int)
