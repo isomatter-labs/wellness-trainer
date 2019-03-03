@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -20,8 +21,6 @@ import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.dialog_add_name.view.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
-    private var workoutList: ArrayList<Workout> = ArrayList()
     private lateinit var adapter: RecyclerAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
 
@@ -30,13 +29,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         get() = linearLayoutManager.findLastVisibleItemPosition()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        var workoutList = IsoApp.workouts
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
         linearLayoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = linearLayoutManager
-        adapter = RecyclerAdapter(workoutList, applicationContext)
+        adapter = RecyclerAdapter(applicationContext)
         recyclerView.adapter = adapter
 
         fab.setOnClickListener { view ->
@@ -69,14 +69,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
-    }
-
-    override fun onActivityResult(req: Int, res: Int, intent: Intent?) {
-        if (req == 1) {
-            if (res == Activity.RESULT_OK) {
-                var workout = intent?.getSerializableExtra("WORKOUT")
-            }
-        }
     }
 
 

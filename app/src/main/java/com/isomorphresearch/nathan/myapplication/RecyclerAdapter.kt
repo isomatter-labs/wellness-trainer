@@ -15,14 +15,16 @@ import android.widget.ImageView
 import kotlinx.android.synthetic.main.dialog_del_workout.view.*
 import kotlinx.android.synthetic.main.recyclerview_item_row.view.*
 
-class RecyclerAdapter(private var workouts: ArrayList<Workout>, var context: Context) : RecyclerView.Adapter<RecyclerAdapter.WorkoutHolder>() {
+class RecyclerAdapter(var context: Context) : RecyclerView.Adapter<RecyclerAdapter.WorkoutHolder>() {
 
+    var wPosition: Int? = null
     override fun onBindViewHolder(holder: RecyclerAdapter.WorkoutHolder, position: Int) {
-        val itemIndex = workouts[position]
+        val itemIndex = IsoApp.workouts[position]
+        wPosition = position
         holder.bindWorkout(itemIndex)
     }
 
-    override fun getItemCount() = workouts.size
+    override fun getItemCount() = IsoApp.workouts.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkoutHolder {
         val inflatedView = parent.inflate(R.layout.recyclerview_item_row, false)
@@ -55,7 +57,7 @@ class RecyclerAdapter(private var workouts: ArrayList<Workout>, var context: Con
 //                mDialogView.dialogCancelBtn.setOnClickListener {
 //                    mAlertDialog.dismiss()
 //                }
-                workouts.remove(workout)
+                IsoApp.workouts.remove(workout)
                 notifyDataSetChanged()
             }
         }
@@ -65,7 +67,7 @@ class RecyclerAdapter(private var workouts: ArrayList<Workout>, var context: Con
             Log.d("RecyclerView", "CLICK!")
             val context = itemView.context
             val intent = Intent(context, WorkoutActivity::class.java)
-            intent.putExtra("WORKOUT", workout)
+            intent.putExtra("WORKOUT", wPosition)
             (context as Activity).startActivityForResult(intent, 1)
         }
 

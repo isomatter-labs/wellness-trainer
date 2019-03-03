@@ -21,10 +21,11 @@ class WorkoutActivity : AppCompatActivity() {
     private lateinit var linearLayoutManager: LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        var workouts = IsoApp.workouts
         super.onCreate(savedInstanceState)
         setContentView(R.layout.app_bar_workout)
-        val selectedWorkout = intent.getSerializableExtra("WORKOUT") as Workout
-        //selectedWorkout = workouts[position]
+        val position = intent.getIntExtra("WORKOUT", 0)
+        selectedWorkout = workouts[position]
 
         linearLayoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = linearLayoutManager
@@ -62,14 +63,6 @@ class WorkoutActivity : AppCompatActivity() {
             }
 
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        val intent = Intent()
-        intent.putExtra("WORKOUT", selectedWorkout)
-        setResult(Activity.RESULT_OK, intent)
-        finish()
     }
 
 
