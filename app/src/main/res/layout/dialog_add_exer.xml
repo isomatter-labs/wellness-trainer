@@ -8,23 +8,23 @@
 
     <EditText
             android:id="@+id/dialogExerNameEt"
-            android:hint="My Workout"
+            android:hint="Exercise Name"
             android:inputType="text|textAutoComplete"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
     <EditText
             android:id="@+id/dialogExerDescEt"
-            android:hint="Jumping jacks for days!"
+            android:hint="Exercise Description"
             android:inputType="textShortMessage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
 
     <EditText
             android:id="@+id/dialogExerTime"
-            android:hint="3000"
+            android:hint="Time (min)"
             android:inputType="number"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
 
     <LinearLayout
             android:layout_width="match_parent"
