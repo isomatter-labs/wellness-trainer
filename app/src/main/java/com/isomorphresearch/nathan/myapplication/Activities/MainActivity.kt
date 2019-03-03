@@ -69,9 +69,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             mDialogView.dialogCancelBtn.setOnClickListener {
                 mAlertDialog.dismiss()
             }
-
-            Snackbar.make(view, "Workthing Added", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
         }
 
         val toggle = ActionBarDrawerToggle(

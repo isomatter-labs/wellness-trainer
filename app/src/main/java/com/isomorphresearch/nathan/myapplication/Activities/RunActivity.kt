@@ -15,6 +15,7 @@ import com.isomorphresearch.nathan.myapplication.Classes.Workout
 import com.isomorphresearch.nathan.myapplication.IsoApp
 import kotlinx.android.synthetic.main.activity_run.*
 import kotlinx.android.synthetic.main.dialog_add_name.view.*
+import kotlinx.android.synthetic.main.dialog_workout_done.view.*
 
 
 class RunActivity : AppCompatActivity() {
@@ -47,8 +48,16 @@ class RunActivity : AppCompatActivity() {
         Log.e("NATHAN1", "runTimeIndex -> " + index)
 
         if (index >= wk.exercises.size) {
-            finish()
-            return
+            val mDialogView = LayoutInflater.from(this).inflate(com.isomorphresearch.nathan.myapplication.R.layout.dialog_workout_done, null)
+            val mBuilder = AlertDialog.Builder(this)
+                .setView(mDialogView)
+                .setTitle("Finished!")
+            val mAlertDialog = mBuilder.show()
+
+            mDialogView.dialogOkBtn.setOnClickListener {
+                mAlertDialog.dismiss()
+                finish()
+            }
         }
         Log.e("NATHAN1", "thing -> " + wk.exercises[index].name)
         object : CountDownTimer((wk.exercises[index].time /* * 60 */* 1000).toLong(), 1000) { // DEBUG / DEMO TODO
