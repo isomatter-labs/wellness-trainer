@@ -73,8 +73,10 @@ class RecyclerAdapter(var context: Context) : RecyclerView.Adapter<RecyclerAdapt
 
         fun bindWorkout(workout: Workout) {
             this.workout = workout
-//            Picasso.with(view.context).load(workout.img).into(view.itemImage)
-            view.itemDescription.text = workout.name;
+//            Picasso.with(view.context).load(workout.img).into(view.itemImage)         
+            view.itemName.text = workout.name;
+            view.itemDesc.text = workout.desc;
+            view.imageView4.setImageResource(R.drawable.ic_logo)
             Log.e("fuck", "fuck")
         }
 
