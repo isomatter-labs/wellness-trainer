@@ -32,7 +32,7 @@ class RunActivity : AppCompatActivity() {
         Log.e("NATHAN1", workout.exercises.size.toString())
 
 
-        thing(workout.exercises, 0, textView6)
+        runExercise(workout.exercises, 0, textView6, textView3)
 
 
         /*
@@ -97,28 +97,53 @@ class RunActivity : AppCompatActivity() {
 //            }
 //        }.start()
 
-    fun thing(lst: ArrayList<Exercise>, index: Int, context: TextView) {
-        Log.e("NATHAN1", "thing -> " + lst[index].name)
+    fun runExercise(lst: ArrayList<Exercise>, index: Int, time: TextView, title: TextView) {
+        Log.e("NATHAN1", "runTimeIndex -> " + index)
 
         if (index >= lst.size) {
+            finish()
             return
         }
+        Log.e("NATHAN1", "thing -> " + lst[index].name)
         object : CountDownTimer((lst[index].time * 60 * 1000).toLong(), 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 var totsec = millisUntilFinished / 1000
                 var min = totsec.div(60)
                 var sec = totsec % 60
 
-                context.setText("$min:$sec")
+                time.setText("$min:$sec")
+                title.setText(lst[index].name)
             }
             override fun onFinish() {
                 Log.e("NATHAN1", lst[index].name)
                 // hanging up in here
-                thing(lst, index + 1, context)
+                runCooldown(lst, index + 1, time, title)
             }
         }.start()
+    }
 
+    fun runCooldown(lst: ArrayList<Exercise>, index: Int, time: TextView, title: TextView) {
 
+        if (index >= lst.size) {
+            finish()
+            return
+        }
+        Log.e("NATHAN1", "thing -> cooldown")
+        object : CountDownTimer((2 * 1000).toLong(), 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                var totsec = millisUntilFinished / 1000
+                var min = totsec.div(60)
+                var sec = totsec % 60
+
+                time.setText("$min:$sec")
+                title.setText("Cooldown")
+            }
+            override fun onFinish() {
+                Log.e("NATHAN1", lst[index].name)
+                // hanging up in here
+                runExercise(lst, index, time, title)
+            }
+        }.start()
     }
 
 
