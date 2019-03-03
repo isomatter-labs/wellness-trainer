@@ -77,7 +77,18 @@ class RecyclerAdapter(var context: Context) : RecyclerView.Adapter<RecyclerAdapt
             view.itemName.text = workout.name;
             view.itemDesc.text = workout.desc;
             view.imageView4.setImageResource(R.drawable.ic_logo)
-            Log.e("fuck", "fuck")
+            var totalSecs = 0
+            if (workout.exercises.size > 0) {
+                workout.cooldown * (workout.exercises.size - 1)
+            }
+            for (exercise in workout.exercises) {
+                totalSecs += exercise.time * 60 // in seconds
+            }
+            var minutes = totalSecs.div(60)
+            var seconds = totalSecs % 60
+
+                view.time.text = "$minutes:$seconds"
+            }
         }
 
 //        companion object {

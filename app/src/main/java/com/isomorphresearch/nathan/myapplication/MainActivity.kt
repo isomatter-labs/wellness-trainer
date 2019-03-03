@@ -50,7 +50,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 mAlertDialog.dismiss()
                 val newName = mDialogView.dialogNameEt.text.toString()
                 val newDescription = mDialogView.dialogDescEt.text.toString()
-                workoutList.add(Workout(name=newName, desc = newDescription, img="", exercises = arrayListOf()))
+                var newCooldown = 0
+                val newCooldownStr = mDialogView.dialogTimeEt.text.toString()
+                if (newCooldownStr != "") {
+                    newCooldown = newCooldownStr.toInt()
+                }
+                workoutList.add(Workout(name=newName, cooldown = newCooldown, desc = newDescription, img="", exercises = arrayListOf()))
                 adapter!!.notifyDataSetChanged()
             }
 
